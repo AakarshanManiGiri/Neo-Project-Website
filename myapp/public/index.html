@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Aaku's Portfolio</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+    }
+  </style>
+</head>
+
+<body class="bg-slate-900 text-gray-100">
+
+  <!-- Fluid Background -->
+  <canvas id="fluid-bg" class="fixed inset-0 -z-10"></canvas>
+
+  <div class="relative z-10">
+
+    <!-- Navbar -->
+    <nav class="bg-transparent shadow-md fixed top-0 left-0 w-full z-50">
+      <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+        <h1 class="text-xl font-bold">Aaku's Portfolio</h1>
+        <ul class="hidden md:flex space-x-6 font-medium">
+          <li><a href="#home" class="hover:text-blue-600">Home</a></li>
+          <li><a href="#projects" class="hover:text-blue-600">Projects</a></li>
+          <li><a href="#about" class="hover:text-blue-600">About</a></li>
+          <li><a href="#contact" class="hover:text-blue-600">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center pt-20">
+      <div class="text-center">
+        <h1 class="text-5xl font-bold mb-4">Hi, I'm <span class="text-blue-600">Aaku</span></h1>
+        <p class="text-lg text-gray-300 max-w-xl mx-auto">
+          A passionate developer focused on building modern, secure, and responsive applications.
+        </p>
+        <div class="mt-6">
+          <a href="#projects" class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">View My Work</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-white/5 backdrop-blur-sm text-gray-100">
+       <div class="max-w-6xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">
+          My Projects
+        </h2>
+        <!-- GitHub Projects Will Be Injected Here -->
+        <div id="project-list" class="grid md:grid-cols-3 gap-8"></div>
+
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 text-gray-100">
+      <div class="max-w-5xl mx-auto px-6">
+        <h2 class="text-3xl font-bold text-center mb-12">About Me</h2>
+
+        <div class="md:flex items-center gap-10">
+          <img src="https://github.com/AakarshanManiGiri.png"
+               alt="profile"
+               class="w-32 h-32 rounded-full ring-4 ring-blue-300/40 shadow-lg object-cover" />
+
+          <p class="text-gray-300 text-lg mt-6 md:mt-0">
+            Hello world! My name is Aakarshan, but you can call me Aaku. I'm a developer that's from Nepal, Dubai and now, Australia.
+            I'm a cross disciplinary developer with a deep-seated passion in both Cyber Security and Software Development.
+            My tech journey intially began with a deep fascination of how video games worked and specifically how i could manipulate
+            them to my advantage. This curiosity quickly led me down a path of exploring system exploiting, network protocols, software design
+            and much much more. Over the years, I've spent countless hours learning my craft and im excited to share my journey with you. (Well Hopefully!).
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white/5 backdrop-blur-sm text-gray-100">
+      <div class="max-w-4xl mx-auto px-6 text-center">
+
+        <h2 class="text-3xl font-bold mb-8">Contact Me</h2>
+
+        <p class="text-gray-700 mb-2">
+          email me at:
+          <a href="mailto:aakarshanmgiri@gmail.com" class="text-blue-600 underline">
+            aakarshanmgiri@gmail.com
+          </a>
+        </p>
+
+        <p class="text-gray-600 mb-6">
+          or press the button below to open your mail app.
+        </p>
+
+        <a href="mailto:aakarshanmgiri@gmail.com"
+           class="px-8 py-3 bg-blue-200 hover:bg-blue-300 text-black rounded-lg shadow transition font-semibold">
+          send me an email!
+        </a>
+
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="Scripts.js"></script>
+
+  <!-- Footer -->
+  <footer class="py-6 text-center bg-gray-800 text-white">
+    <p>© 2025 Aakarshan Mani Giri — All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
