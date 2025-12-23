@@ -141,7 +141,7 @@ class Particle {
 }
 
 const particles = [];
-const PARTICLE_COUNT = 100;
+const PARTICLE_COUNT = 300;
 for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
 
 function animate() {
