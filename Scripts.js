@@ -148,7 +148,7 @@ function animate() {
   requestAnimationFrame(animate);
 
   ctx.globalCompositeOperation = "source-over";
-  ctx.fillStyle = "rgba(7, 16, 39, 0.8)";
+  ctx.fillStyle = "rgba(7, 16, 39, 1.5)";
   ctx.fillRect(0, 0, width, height);
 
   ctx.globalCompositeOperation = "lighter";
