@@ -54,16 +54,20 @@ const ctx = canvas.getContext("2d");
 
 let width = window.innerWidth;
 let height = window.innerHeight;
-canvas.width = width;
-canvas.height = height;
+canvas.width = width * 0.5; 
+canvas.height = height * 0.5;
+canvas.style.width = width + 'px';
+canvas.style.height = height + 'px';
 
 const mouse = { x: width / 2, y: height / 2, down: false };
 
 window.addEventListener("resize", () => {
   width = window.innerWidth;
   height = window.innerHeight;
-  canvas.width = width;
-  canvas.height = height;
+  canvas.width = width * 0.5;
+  canvas.height = height * 0.5;
+  canvas.style.width = width + 'px';
+  canvas.style.height = height + 'px';
 });
 
 window.addEventListener("mousemove", (e) => {
@@ -137,7 +141,7 @@ class Particle {
 }
 
 const particles = [];
-const PARTICLE_COUNT = 150;
+const PARTICLE_COUNT = 100;
 for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
 
 function animate() {
