@@ -128,15 +128,12 @@ class Particle {
   }
 
   draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-    ctx.fillStyle = this.color;
-    ctx.globalAlpha = 0.85;
-    ctx.shadowColor = this.color;
-    ctx.fill();
-    ctx.shadowBlur = 0;
-    
-  }
+  ctx.beginPath();
+  ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+  ctx.fillStyle = this.color;
+  ctx.globalAlpha = 0.85;
+  ctx.fill();
+}
 }
 
 const particles = [];
