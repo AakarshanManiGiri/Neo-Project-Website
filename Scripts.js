@@ -109,8 +109,8 @@ class Particle {
     this.vx += Math.cos(angle) * 0.02;
     this.vy += Math.sin(angle) * 0.02;
 
-    this.vx *= 0.92;
-    this.vy *= 0.92;
+    this.vx *= 0.96;
+    this.vy *= 0.96;
 
     this.x += this.vx;
     this.y += this.vy;
@@ -148,7 +148,7 @@ function animate() {
   requestAnimationFrame(animate);
 
   ctx.globalCompositeOperation = "source-over";
-  ctx.fillStyle = "rgba(7, 16, 39, 1.5)";
+  ctx.fillStyle = "rgba(7, 16, 39, 0.25)";
   ctx.fillRect(0, 0, width, height);
 
   ctx.globalCompositeOperation = "lighter";
