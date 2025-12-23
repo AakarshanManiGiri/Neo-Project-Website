@@ -132,7 +132,6 @@ class Particle {
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
     ctx.fillStyle = this.color;
     ctx.globalAlpha = 0.85;
-    ctx.shadowBlur = 5;
     ctx.shadowColor = this.color;
     ctx.fill();
     ctx.shadowBlur = 0;
