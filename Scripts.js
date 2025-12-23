@@ -151,7 +151,6 @@ function animate() {
   ctx.fillStyle = "rgba(7, 16, 39, 1.5)";
   ctx.fillRect(0, 0, width, height);
 
-  ctx.globalCompositeOperation = "lighter";
 
   particles.forEach((p) => {
     p.update();
