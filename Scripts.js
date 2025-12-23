@@ -132,7 +132,11 @@ class Particle {
     ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
     ctx.fillStyle = this.color;
     ctx.globalAlpha = 0.85;
+    ctx.shadowBlur = 5;
+    ctx.shadowColor = this.color;
     ctx.fill();
+    ctx.shadowBlur = 0;
+    
   }
 }
 
@@ -144,7 +148,7 @@ function animate() {
   requestAnimationFrame(animate);
 
   ctx.globalCompositeOperation = "source-over";
-  ctx.fillStyle = "rgba(7, 16, 39, 0.16)";
+  ctx.fillStyle = "rgba(7, 16, 39, 0.25)";
   ctx.fillRect(0, 0, width, height);
 
   ctx.globalCompositeOperation = "lighter";
