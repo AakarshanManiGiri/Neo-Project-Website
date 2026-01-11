@@ -59,7 +59,7 @@ canvas.height = height * 0.5;
 canvas.style.width = (width * 0.5) + 'px';
 canvas.style.height = (height * 0.5) + 'px';
 
-const mouse = { x: width / 4, y: height / 4, down: false };
+const mouse = { x: canvas.width / 2, y: canvas.height / 2, down: false };
 
 window.addEventListener("resize", () => {
   width = window.innerWidth;
@@ -87,8 +87,8 @@ class Particle {
   }
 
   reset() {
-    this.x = Math.random() * width;
-    this.y = Math.random() * height;
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
     this.vx = (Math.random() - 0.5) * 0.5;
     this.vy = (Math.random() - 0.5) * 0.5;
     this.size = 1 + Math.random() * 2;
@@ -121,13 +121,13 @@ class Particle {
 
     if (
       this.x < -50 ||
-      this.x > width + 50 ||
+      this.x > canvas.width + 50 ||
       this.y < -50 ||
-      this.y > height + 50
+      this.y > canvas.height + 50
     ) {
       this.reset();
-      this.x = Math.random() * width;
-      this.y = Math.random() * height;
+      this.x = Math.random() * canvas.width;
+      this.y = Math.random() * canvas.height;
     }
   }
 
@@ -149,7 +149,7 @@ function animate() {
 
   ctx.globalCompositeOperation = "source-over";
   ctx.fillStyle = "rgba(7, 16, 39, 0.25)";
-  ctx.fillRect(0, 0, width, height);
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.globalCompositeOperation = "lighter";
 
