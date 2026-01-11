@@ -56,8 +56,8 @@ let width = window.innerWidth;
 let height = window.innerHeight;
 canvas.width = width * 0.5; 
 canvas.height = height * 0.5;
-canvas.style.width = width + 'px';
-canvas.style.height = height + 'px';
+canvas.style.width = (width * 0.5) + 'px';
+canvas.style.height = (height * 0.5) + 'px';
 
 const mouse = { x: width / 2, y: height / 2, down: false };
 
