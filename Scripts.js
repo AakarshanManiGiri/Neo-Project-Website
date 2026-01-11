@@ -54,25 +54,25 @@ const ctx = canvas.getContext("2d");
 
 let width = window.innerWidth;
 let height = window.innerHeight;
-canvas.width = width * 0.5; 
-canvas.height = height * 0.5;
-canvas.style.width = (width * 0.5) + 'px';
-canvas.style.height = (height * 0.5) + 'px';
+canvas.width = width; 
+canvas.height = height;
+canvas.style.width = width + 'px';
+canvas.style.height = height + 'px';
 
 const mouse = { x: canvas.width / 2, y: canvas.height / 2, down: false };
 
 window.addEventListener("resize", () => {
   width = window.innerWidth;
   height = window.innerHeight;
-  canvas.width = width * 0.5;
-  canvas.height = height * 0.5;
-  canvas.style.width = (width * 0.5) + 'px';
-  canvas.style.height = (height * 0.5) + 'px';
+  canvas.width = width;
+  canvas.height = height;
+  canvas.style.width = width + 'px';
+  canvas.style.height = height + 'px';
 });
 
 window.addEventListener("mousemove", (e) => {
-  mouse.x = e.clientX * 0.5;
-  mouse.y = e.clientY * 0.5;
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
 });
 
 window.addEventListener("mousedown", () => (mouse.down = true));
