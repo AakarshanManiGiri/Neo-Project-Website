@@ -3,125 +3,240 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Aaku's Portfolio</title>
+  <meta name="theme-color" content="#1c3934" />
+  <title>AKU | Neo-Brutalist Emerald & Cognac</title>
 
-  <!-- Tailwind CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-      font-family: "Poppins", sans-serif;
-    }
-    html {
-      scroll-behavior: smooth;
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="scripts.js"></script>
 </head>
-
-<body class="bg-slate-900 text-gray-100">
-
-  <!-- Fluid Background -->
-  <canvas id="fluid-bg" class="fixed inset-0 -z-10"></canvas>
-
-  <div class="relative z-10">
-
-    <!-- Navbar -->
-    <nav class="bg-transparent shadow-md fixed top-0 left-0 w-full z-50">
-      <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-        <h1 class="text-xl font-bold">Aaku's Portfolio</h1>
-        <ul class="hidden md:flex space-x-6 font-medium">
-          <li><a href="#home" class="hover:text-blue-600">Home</a></li>
-          <li><a href="#projects" class="hover:text-blue-600">Projects</a></li>
-          <li><a href="#about" class="hover:text-blue-600">About</a></li>
-          <li><a href="#contact" class="hover:text-blue-600">Contact</a></li>
-        </ul>
-      </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center justify-center pt-20">
-      <div class="text-center">
-        <h1 class="text-5xl font-bold mb-4">Hi, I'm <span class="text-blue-600">Aaku</span></h1>
-        <p class="text-lg text-gray-300 max-w-xl mx-auto">
-          A passionate developer focused on building modern, secure, and responsive applications.
-        </p>
-        <div class="mt-6">
-          <a href="#projects" class="px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">View My Work</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-white/5 backdrop-blur-sm text-gray-100">
-       <div class="max-w-6xl mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-12 text-white drop-shadow-[0_0_8px_rgba(255,255,255,0.6)]">
-          My Projects
-        </h2>
-        <!-- GitHub Projects Will Be Injected Here -->
-        <div id="project-list" class="grid md:grid-cols-3 gap-8"></div>
-
-      </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 text-gray-100">
-      <div class="max-w-5xl mx-auto px-6">
-        <h2 class="text-3xl font-bold text-center mb-12">About Me</h2>
-
-        <div class="md:flex items-center gap-10">
-          <img src="https://github.com/AakarshanManiGiri.png"
-               alt="profile"
-               class="w-32 h-32 rounded-full ring-4 ring-blue-300/40 shadow-lg object-cover" />
-
-          <p class="text-gray-300 text-lg mt-6 md:mt-0">
-            Hello world! My name is Aakarshan, but you can call me Aaku. I'm a developer that's from Nepal, Dubai and now, Australia.
-            I'm a cross disciplinary developer with a deep-seated passion in both Cyber Security and Software Development.
-            My tech journey intially began with a deep fascination of how video games worked and specifically how i could manipulate
-            them to my advantage. This curiosity quickly led me down a path of exploring system exploiting, network protocols, software design
-            and much much more. Over the years, I've spent countless hours learning my craft and im excited to share my journey with you. (Well Hopefully!).
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-white/5 backdrop-blur-sm text-gray-100">
-      <div class="max-w-4xl mx-auto px-6 text-center">
-
-        <h2 class="text-3xl font-bold mb-8">Contact Me</h2>
-
-        <p class="text-gray-700 mb-2">
-          email me at:
-          <a href="mailto:aakarshanmgiri@gmail.com" class="text-blue-600 underline">
-            aakarshanmgiri@gmail.com
-          </a>
-        </p>
-
-        <p class="text-gray-600 mb-6">
-          or press the button below to open your mail app.
-        </p>
-
-        <a href="mailto:aakarshanmgiri@gmail.com"
-           class="px-8 py-3 bg-blue-200 hover:bg-blue-300 text-black rounded-lg shadow transition font-semibold">
-          send me an email!
-        </a>
-
-      </div>
-    </section>
-
+<body>
+  <div class="splash" id="splash" aria-hidden="true">
+    <div class="splash__fill"></div>
+    <div class="splash__content">
+      <svg class="aku-mark aku-mark--splash" viewBox="0 0 960 260" role="presentation" focusable="false">
+        <text class="aku-mark__shadow" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">AKU</text>
+        <text class="aku-mark__depth" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">AKU</text>
+        <text class="aku-mark__front" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">AKU</text>
+      </svg>
+      <p class="splash__label">transition / coffee fill</p>
+    </div>
   </div>
 
-  <!-- Scripts -->
-  <script src="Scripts.js"></script>
+  <nav class="side-nav" aria-label="Primary navigation">
+    <div class="brand-lockup">
+      <div class="brand-lockup__logo">AKU</div>
+      <p class="brand-lockup__copy">Aaku's Portfolio</p>
+    </div>
 
-  <!-- Footer -->
-  <footer class="py-6 text-center bg-gray-800 text-white">
+    <div class="side-nav__rule"></div>
+
+    <a class="nav-link is-active" data-nav-link href="#projects">
+      <span class="material-symbols-outlined nav-link__icon" aria-hidden="true">work</span>
+      <span>Projects</span>
+    </a>
+    <a class="nav-link" data-nav-link href="#contact">
+      <span class="material-symbols-outlined nav-link__icon" aria-hidden="true">mail</span>
+      <span>Email</span>
+    </a>
+    <a class="nav-link" data-nav-link href="#about-me">
+      <span class="material-symbols-outlined nav-link__icon" aria-hidden="true">person</span>
+      <span>About Me</span>
+    </a>
+    <a class="nav-link" data-nav-link href="#about-website">
+      <span class="material-symbols-outlined nav-link__icon" aria-hidden="true">info</span>
+      <span>About Website</span>
+    </a>
+  </nav>
+
+  <nav class="mobile-nav" aria-label="Quick navigation">
+    <a class="nav-link nav-link--mobile is-active" data-nav-link href="#projects">
+      <span class="material-symbols-outlined nav-link__icon" aria-hidden="true">work</span>
+      <span>Projects</span>
+    </a>
+    <a class="nav-link nav-link--mobile" data-nav-link href="#contact">
+      <span class="material-symbols-outlined nav-link__icon" aria-hidden="true">mail</span>
+      <span>Email</span>
+    </a>
+    <a class="nav-link nav-link--mobile" data-nav-link href="#about-me">
+      <span class="material-symbols-outlined nav-link__icon" aria-hidden="true">person</span>
+      <span>About Me</span>
+    </a>
+    <a class="nav-link nav-link--mobile" data-nav-link href="#about-website">
+      <span class="material-symbols-outlined nav-link__icon" aria-hidden="true">info</span>
+      <span>About Website</span>
+    </a>
+  </nav>
+
+  <div class="top-actions" aria-label="Social actions">
+    <span class="top-actions__brand">AKU</span>
+    <a class="pressable pressable--icon" href="https://www.linkedin.com/in/aakarshanmg" target="_blank" rel="noreferrer" aria-label="Open LinkedIn">
+      <span class="material-symbols-outlined" aria-hidden="true">link</span>
+      <span class="top-actions__text">LinkedIn</span>
+    </a>
+    <a class="pressable pressable--icon" href="https://github.com/AakarshanManiGiri" target="_blank" rel="noreferrer" aria-label="Open GitHub">
+      <span class="material-symbols-outlined" aria-hidden="true">code</span>
+      <span class="top-actions__text">GitHub</span>
+    </a>
+  </div>
+
+  <main class="page" aria-label="AKU portfolio content">
+    <div class="canvas-grid">
+      <section id="hero" class="panel panel--heavy hero span-12">
+        <div class="hero__copy">
+          <p class="eyebrow">Aaku's Portfolio</p>
+          <h1 class="hero__title">HI, I'M AAKU.</h1>
+          <p class="hero__lede">
+            A passionate developer focused on building modern, secure, and responsive applications.
+          </p>
+
+          <div class="hero__actions">
+            <a class="pressable" href="#projects">
+              View My Work
+              <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+            </a>
+            <a class="pressable pressable--secondary" href="mailto:aakarshanmgiri@gmail.com">
+              Send Me an Email!
+              <span class="material-symbols-outlined" aria-hidden="true">mail</span>
+            </a>
+          </div>
+
+          <div class="chip-row" aria-label="Design tokens">
+            <span class="chip">Python</span>
+            <span class="chip">Springboot/JavaScript/Java</span>
+            <span class="chip">Web Development{HTML,CSS,JavaScript,React,Tailwind CSS}</span>
+            <span class="chip">C++</span>
+          </div>
+        </div>
+
+        <div class="hero__mark">
+          <svg class="aku-mark aku-mark--hero" viewBox="0 0 960 260" role="img" aria-label="AKU wireframe logo">
+            <text class="aku-mark__shadow" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">AKU</text>
+            <text class="aku-mark__depth" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">AKU</text>
+            <text class="aku-mark__front" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">AKU</text>
+          </svg>
+
+          <div class="hero__mark-note">
+            <div class="hero__mark-rule"></div>
+            <p>
+            
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects" class="panel section-block span-12">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">My Projects</p>
+            <h2 class="section-title">GitHub Projects</h2>
+          </div>
+          <p class="section-copy">
+            GitHub projects are populated here automatically from the github in <span>scripts.js</span>.
+          </p>
+        </div>
+
+        <div class="project-grid" id="project-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="about-me" class="panel section-block span-4">
+        <div class="section-head section-head--stacked">
+          <div>
+            <p class="eyebrow">About me</p>
+            <h2 class="section-title section-title--small">Aaku</h2>
+          </div>
+        </div>
+
+        <div class="portrait-frame">
+          <div class="portrait-frame__inner">
+            <img class="portrait-frame__photo" src="https://github.com/AakarshanManiGiri.png" alt="Aakarshan Mani Giri profile picture" />
+          </div>
+        </div>
+
+        <p class="body-copy">
+          Hello world! My name is Aakarshan, but you can call me Aaku. I'm a developer that's from Nepal, Dubai and now, Australia. I'm a cross disciplinary developer with a deep-seated passion in both Cyber Security and Software Development. My tech journey intially began with a deep fascination of how video games worked and specifically how i could manipulate them to my advantage. This curiosity quickly led me down a path of exploring system exploiting, network protocols, software design and much much more. Over the years, I've spent countless hours learning my craft and im excited to share my journey with you. (Well Hopefully!).
+        </p>
+
+        <div class="chip-row">
+          <span class="chip">Frontend systems</span>
+          <span class="chip">Security-minded tooling</span>
+          <span class="chip">Design systems</span>
+        </div>
+      </section>
+
+      <section id="about-website" class="panel section-block span-8">
+        <div class="section-head section-head--stacked">
+          <div>
+            <p class="eyebrow">About website</p>
+            <h2 class="section-title">Architecture & philosophy</h2>
+          </div>
+        </div>
+
+        <div class="philosophy-grid">
+          <article class="info-card">
+            <h3>The framework</h3>
+            <div class="info-card__rule"></div>
+            <p>
+              The design philosophy for this site is neo-brutalism, which is characterized by bold, unapologetic use of color, raw textures, and a focus on functionality over form. The framework used to build this site is vanilla HTML, CSS, and JavaScript with no build step or dependencies. This approach allows for maximum control over the design and performance of the site while adhering to the brutalist ethos of simplicity and rawness.
+            </p>
+          </article>
+
+          <article class="info-card">
+            <h3>Interaction design</h3>
+            <div class="info-card__rule"></div>
+            <p>
+              A more personal reason for this design methodology and color pallette is my deep and unfiltered love of coffee. The colors of this site are inspired by the rich, earthy tones of coffee, with a palette that includes deep browns, warm ambers, and vibrant emeralds. The design is meant to evoke the feeling of sipping a perfectly brewed cup of iced latte while browsing through my projects and learning about my journey as a developer.
+            </p>
+          </article>
+
+          <article class="info-card info-card--full">
+            <h3>Typography and color</h3>
+            <div class="info-card__rule"></div>
+            <p>
+                The typography choices for this site are Space Grotesk for headings and Space Mono for body text. Space Grotesk is a modern, geometric sans-serif typeface that adds a bold and contemporary feel to the design, while Space Mono is a monospaced font that provides a clean and readable texture for the body copy. The color palette of deep browns, warm ambers, and vibrant emeralds is used consistently throughout the site to create a cohesive and immersive experience that reflects my personal style and love of coffee.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section id="contact" class="panel section-block span-12 contact-block">
+        <div class="section-head section-head--stacked">
+          <div>
+            <p class="eyebrow">Contact Me</p>
+            <h2 class="section-title">Reach out</h2>
+          </div>
+        </div>
+
+        <div class="contact-grid">
+          <a class="pressable" href="mailto:aakarshanmgiri@gmail.com">
+            send me an email!
+            <span class="material-symbols-outlined" aria-hidden="true">mail</span>
+          </a>
+
+          <a class="pressable pressable--secondary" href="https://github.com/AakarshanManiGiri" target="_blank" rel="noreferrer">
+            GitHub profile
+            <span class="material-symbols-outlined" aria-hidden="true">code</span>
+          </a>
+
+          <div class="contact-note">
+            <p>
+              email me at:
+              <a href="mailto:aakarshanmgiri@gmail.com">aakarshanmgiri@gmail.com</a>
+            </p>
+            <p class="contact-note__small">
+              or press the button below to open your mail app.
+            </p>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer">
     <p>© 2025 Aakarshan Mani Giri — All rights reserved.</p>
   </footer>
-
 </body>
 </html>

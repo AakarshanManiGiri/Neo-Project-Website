@@ -1,162 +1,217 @@
-// ----------------------------
-// GitHub Project Fetcher
-// ----------------------------
+const githubUsername = "AakarshanManiGiri";
+const tonePattern = ["cognac", "emerald", "amber", "panel"];
+const spanPattern = [7, 5, 4, 8];
+
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+function escapeHtml(value) {
+  return String(value)
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+function formatRepoYear(repo) {
+  const dateValue = repo.updated_at || repo.pushed_at || repo.created_at;
+  if (!dateValue) {
+    return "Repo";
+  }
+
+  return String(new Date(dateValue).getFullYear());
+}
+
+function renderStatusCard(title, description) {
+  return `
+    <article class="project-card" data-tone="panel" data-span="12">
+      <div class="project-card__head">
+        <div>
+          <p class="project-card__label">GitHub</p>
+          <h3 class="project-card__title">${escapeHtml(title)}</h3>
+        </div>
+        <span class="project-card__year">API</span>
+      </div>
+
+      <div class="project-card__rule"></div>
+
+      <p class="project-card__body">${escapeHtml(description)}</p>
+    </article>
+  `;
+}
+
+function renderProjectCard(repo, index) {
+  const tone = tonePattern[index % tonePattern.length];
+  const span = spanPattern[index % spanPattern.length];
+  const techItems = [repo.language, repo.private ? "Private" : "Public", `${repo.stargazers_count} Stars`].filter(Boolean);
+  const techMarkup = techItems
+    .map((item) => `<span class="chip">${escapeHtml(item)}</span>`)
+    .join("");
+
+  return `
+    <article class="project-card" data-tone="${escapeHtml(tone)}" data-span="${escapeHtml(span)}">
+      <div class="project-card__head">
+        <div>
+          <p class="project-card__label">GitHub Repo</p>
+          <h3 class="project-card__title">${escapeHtml(repo.name)}</h3>
+        </div>
+        <span class="project-card__year">${escapeHtml(formatRepoYear(repo))}</span>
+      </div>
+
+      <div class="project-card__rule"></div>
+
+      <p class="project-card__body">${escapeHtml(repo.description || "No description provided.")}</p>
+
+      <div class="project-card__footer">
+        <div class="project-card__tech">${techMarkup}</div>
+        <a class="pressable" href="${escapeHtml(repo.html_url)}" target="_blank" rel="noreferrer">
+          View on GitHub
+          <span class="material-symbols-outlined" aria-hidden="true">arrow_forward</span>
+        </a>
+      </div>
+    </article>
+  `;
+}
+
 async function loadGitHubProjects() {
-  const username = "AakarshanManiGiri";
+  const container = document.getElementById("project-grid");
+  if (!container) {
+    return;
+  }
+
+  container.setAttribute("aria-busy", "true");
+  container.innerHTML = renderStatusCard(
+    "Loading GitHub projects",
+    "Fetching the latest public repositories from the profile data source."
+  );
 
   try {
-    const response = await fetch(`https://api.github.com/users/${username}/repos?sort=updated`);
-    const repos = await response.json();
+    const response = await fetch(`https://api.github.com/users/${githubUsername}/repos?sort=updated`);
 
-    const container = document.getElementById("project-list");
-    if (!container) return;
+    if (!response.ok) {
+      throw new Error(`GitHub API request failed with status ${response.status}`);
+    }
 
-    container.innerHTML = ""; // Clear old entries
+    const repositories = await response.json();
+    const visibleRepositories = Array.isArray(repositories)
+      ? repositories.filter((repository) => !repository.fork)
+      : [];
 
-    repos.forEach(repo => {
-      if (repo.fork) return; // skip forks
+    if (visibleRepositories.length === 0) {
+      container.innerHTML = renderStatusCard(
+        "No public repositories",
+        "The GitHub profile returned no public repositories to display right now."
+      );
+      return;
+    }
 
-      const card = `
-  <div class="bg-white/10 backdrop-blur-xl border border-white/20 shadow-lg rounded-xl p-6 hover:bg-white/20 transition">
+    container.innerHTML = visibleRepositories.map((repository, index) => renderProjectCard(repository, index)).join("");
+  } catch (error) {
+    console.error("GitHub API error:", error);
+    container.innerHTML = renderStatusCard(
+      "GitHub projects unavailable",
+      "The repository feed could not be loaded right now. Refresh later or check the network connection."
+    );
+  } finally {
+    container.setAttribute("aria-busy", "false");
+  }
+}
 
-    <h3 class="text-xl font-semibold mb-2 text-cyan-200 drop-shadow-[0_0_6px_rgba(0,255,255,0.5)]">
-      ${repo.name}
-    </h3>
+function setupNavigation() {
+  const links = [...document.querySelectorAll("[data-nav-link]")];
+  const sections = [...document.querySelectorAll("main section[id]")];
 
-    <p class="text-sm mb-3 text-white/80">
-      ${repo.description ? repo.description : "No description provided."}
-    </p>
-
-    <a href="${repo.html_url}" target="_blank"
-       class="text-cyan-300 font-semibold hover:underline">
-       View on GitHub →
-    </a>
-
-  </div>
-`;
-
-      container.innerHTML += card;
+  function setActiveLink(targetId) {
+    links.forEach((link) => {
+      const href = link.getAttribute("href") || "";
+      const isActive = href === `#${targetId}`;
+      link.classList.toggle("is-active", isActive);
+      if (isActive) {
+        link.setAttribute("aria-current", "page");
+      } else {
+        link.removeAttribute("aria-current");
+      }
     });
-
-  } catch (err) {
-    console.error("GitHub API error:", err);
-  }
-}
-
-loadGitHubProjects();
-
-
-// ----------------------------
-// Neo-Punk Fluid Background
-// ----------------------------
-const canvas = document.getElementById("fluid-bg");
-const ctx = canvas.getContext("2d");
-
-let width = window.innerWidth;
-let height = window.innerHeight;
-canvas.width = width; 
-canvas.height = height;
-canvas.style.width = width + 'px';
-canvas.style.height = height + 'px';
-
-const mouse = { x: canvas.width / 2, y: canvas.height / 2, down: false };
-
-window.addEventListener("resize", () => {
-  width = window.innerWidth;
-  height = window.innerHeight;
-  canvas.width = width;
-  canvas.height = height;
-  canvas.style.width = width + 'px';
-  canvas.style.height = height + 'px';
-});
-
-window.addEventListener("mousemove", (e) => {
-  mouse.x = e.clientX;
-  mouse.y = e.clientY;
-});
-
-window.addEventListener("mousedown", () => (mouse.down = true));
-window.addEventListener("mouseup", () => (mouse.down = false));
-
-// Neo-punk color palette
-const colors = ["#00f5ff", "#ff00e6", "#8b5cff"];
-
-class Particle {
-  constructor() {
-    this.reset();
   }
 
-  reset() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
-    this.vx = (Math.random() - 0.5) * 0.5;
-    this.vy = (Math.random() - 0.5) * 0.5;
-    this.size = 1 + Math.random() * 2;
-    this.color = colors[Math.floor(Math.random() * colors.length)];
-  }
+  links.forEach((link) => {
+    const href = link.getAttribute("href") || "";
 
-  update() {
-    const dx = mouse.x - this.x;
-    const dy = mouse.y - this.y;
-    const dist = Math.sqrt(dx * dx + dy * dy) || 1;
-
-    const force = mouse.down ? 0.6 : 0.25;
-    const effectRadius = mouse.down ? 260 : 200;
-
-    if (dist < effectRadius) {
-      const strength = (effectRadius - dist) / effectRadius;
-      this.vx += (dx / dist) * strength * force * 0.3;
-      this.vy += (dy / dist) * strength * force * 0.3;
+    if (!href.startsWith("#")) {
+      return;
     }
 
-    const angle = Math.sin(this.y * 0.002 + performance.now() * 0.0004);
-    this.vx += Math.cos(angle) * 0.02;
-    this.vy += Math.sin(angle) * 0.02;
+    link.addEventListener("click", (event) => {
+      const target = document.querySelector(href);
+      if (!target) {
+        return;
+      }
 
-    this.vx *= 0.96;
-    this.vy *= 0.96;
-
-    this.x += this.vx;
-    this.y += this.vy;
-
-    if (
-      this.x < -50 ||
-      this.x > canvas.width + 50 ||
-      this.y < -50 ||
-      this.y > canvas.height + 50
-    ) {
-      this.reset();
-      this.x = Math.random() * canvas.width;
-      this.y = Math.random() * canvas.height;
-    }
-  }
-
-  draw() {
-  ctx.beginPath();
-  ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-  ctx.fillStyle = this.color;
-  ctx.globalAlpha = 0.85;
-  ctx.fill();
-}
-}
-
-const particles = [];
-const PARTICLE_COUNT = 300;
-for (let i = 0; i < PARTICLE_COUNT; i++) particles.push(new Particle());
-
-function animate() {
-  requestAnimationFrame(animate);
-
-  ctx.globalCompositeOperation = "source-over";
-  ctx.fillStyle = "rgba(7, 16, 39, 0.25)";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-  ctx.globalCompositeOperation = "lighter";
-
-  particles.forEach((p) => {
-    p.update();
-    p.draw();
+      event.preventDefault();
+      setActiveLink(href.slice(1));
+      target.scrollIntoView({
+        behavior: reduceMotion ? "auto" : "smooth",
+        block: "start",
+      });
+    });
   });
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((left, right) => right.intersectionRatio - left.intersectionRatio)[0];
+
+        if (visibleEntry) {
+          setActiveLink(visibleEntry.target.id);
+        }
+      },
+      {
+        root: null,
+        threshold: [0.2, 0.35, 0.5, 0.65],
+        rootMargin: "-18% 0px -55% 0px",
+      }
+    );
+
+    sections.forEach((section) => observer.observe(section));
+  } else if (sections[0]) {
+    setActiveLink(sections[0].id);
+  }
+
+  setActiveLink("projects");
 }
 
-animate();
+function revealSplash() {
+  const splash = document.getElementById("splash");
+  if (!splash || splash.dataset.state === "done") {
+    return;
+  }
+
+  document.body.classList.add("is-loaded");
+  window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  splash.dataset.state = "done";
+
+  window.setTimeout(() => {
+    splash.remove();
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, reduceMotion ? 0 : 900);
+}
+
+function init() {
+  if ("scrollRestoration" in history) {
+    history.scrollRestoration = "manual";
+  }
+
+  void loadGitHubProjects();
+  setupNavigation();
+
+  if (document.readyState === "complete") {
+    window.setTimeout(revealSplash, reduceMotion ? 0 : 80);
+    return;
+  }
+
+  window.addEventListener("load", revealSplash, { once: true });
+}
+
+init();
